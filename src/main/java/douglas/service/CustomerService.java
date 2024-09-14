@@ -1,11 +1,10 @@
 package douglas.service;
 
 import douglas.domain.entity.Customer;
-import douglas.exception.CustomerAlreadyExistentExpection;
-import douglas.exception.CustomerNotFoundException;
+import douglas.exception.customers.CustomerAlreadyExistentExpection;
+import douglas.exception.customers.CustomerNotFoundException;
 import douglas.repository.CustomerRepository;
 import io.quarkus.hibernate.orm.panache.PanacheQuery;
-import io.quarkus.panache.common.Sort;
 import jakarta.enterprise.context.ApplicationScoped;
 
 import java.util.List;

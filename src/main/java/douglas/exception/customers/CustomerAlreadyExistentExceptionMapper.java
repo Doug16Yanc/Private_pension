@@ -1,4 +1,4 @@
-package douglas.exception;
+package douglas.exception.customers;
 
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.ExceptionMapper;
