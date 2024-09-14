@@ -9,6 +9,8 @@ public class Address {
 
     public String street;
 
+    public String neighborhood;
+
     public String city;
 
     public String state;

@@ -19,7 +19,7 @@ public class Plan extends PanacheEntityBase {
     public Double rate;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "customer_cpf")
     public Customer customer;
 
     @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

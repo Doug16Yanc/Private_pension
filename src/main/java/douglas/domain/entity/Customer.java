@@ -16,6 +16,8 @@ public class Customer extends PanacheEntityBase {
 
     public String name;
 
+    public String cpf;
+
     public String email;
 
     public String phone;

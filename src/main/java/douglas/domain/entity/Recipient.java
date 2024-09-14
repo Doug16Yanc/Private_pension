@@ -14,6 +14,8 @@ public class Recipient {
 
     public String name;
 
+    public String relationship;
+
     public String email;
 
     public String phone;
