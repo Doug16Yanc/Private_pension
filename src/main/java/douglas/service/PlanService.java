@@ -1,9 +1,6 @@
 package douglas.service;
 
-import douglas.domain.entity.Customer;
-import douglas.domain.entity.Investment;
 import douglas.domain.entity.Plan;
-import douglas.exception.customers.CustomerAlreadyExistentExpection;
 import douglas.exception.plans.PlanNotFoundException;
 import douglas.repository.PlanRepository;
 import jakarta.enterprise.context.ApplicationScoped;
