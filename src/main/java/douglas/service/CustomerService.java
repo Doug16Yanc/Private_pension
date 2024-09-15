@@ -1,7 +1,7 @@
 package douglas.service;
 
 import douglas.domain.entity.Customer;
-import douglas.exception.customers.CustomerAlreadyExistentExpection;
+import douglas.exception.customers.CustomerAlreadyExistentException;
 import douglas.exception.customers.CustomerNotFoundException;
 import douglas.repository.CustomerRepository;
 import io.quarkus.hibernate.orm.panache.PanacheQuery;
@@ -23,7 +23,7 @@ public class CustomerService {
 
         var existing = findByCpf(customer.cpf);
         if (existing != null) {
-            throw new CustomerAlreadyExistentExpection();
+            throw new CustomerAlreadyExistentException();
         }
         customerRepository.persist(customer);
         return customer;
@@ -35,8 +35,8 @@ public class CustomerService {
                 .list();
     }
 
-    public Customer findById(UUID id) {
-        return (Customer) customerRepository.findByIdOptional(id)
+   public Customer findById(UUID id) {
+        return customerRepository.findByIdOptional(id)
                 .orElseThrow(CustomerNotFoundException::new);
     }
 

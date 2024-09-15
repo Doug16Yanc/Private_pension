@@ -1,5 +1,6 @@
 package douglas.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
 
@@ -30,12 +31,13 @@ public class Customer extends PanacheEntityBase {
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     public Set<Plan> plans;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     public List<Recipient> recipients = new ArrayList<>();
 
     public void addRecipient(Recipient recipient) {
-        if (recipients.size() >= 3) {
-            throw new IllegalArgumentException("O número máximo de beneficiários é três.");
+        if (recipients.size() > 1) {
+            throw new IllegalArgumentException("O número máximo de beneficiários é um.");
         }
         this.recipients.add(recipient);
     }

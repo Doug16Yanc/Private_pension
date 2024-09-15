@@ -1,8 +1,8 @@
 package douglas.service;
 
 import douglas.domain.entity.Recipient;
-import douglas.exception.customers.CustomerAlreadyExistentExpection;
-import douglas.exception.customers.CustomerNotFoundException;
+import douglas.exception.customers.CustomerAlreadyExistentException;
+import douglas.exception.recipients.RecipientAlreadyExistentException;
 import douglas.repository.RecipientRepository;
 import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -23,8 +23,7 @@ public class RecipientService {
 
         var existing = findByCpf(recipient.cpf);
         if (existing != null) {
-            throw new CustomerAlreadyExistentExpection();
-        }
+            return null;        }
         recipientRepository.persist(recipient);
         return recipient;
     }
@@ -36,8 +35,8 @@ public class RecipientService {
     }
 
     public Recipient findById(UUID id) {
-        return (Recipient) recipientRepository.findByIdOptional(id)
-                .orElseThrow(CustomerNotFoundException::new);
+        return recipientRepository.findByIdOptional(id)
+               .orElseThrow(RecipientAlreadyExistentException::new);
     }
 
     public Recipient findByCpf(String cpf) {

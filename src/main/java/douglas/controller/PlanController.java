@@ -5,11 +5,14 @@ import douglas.domain.entity.Plan;
 import douglas.service.PlanService;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 import java.util.UUID;
 
-@Path("customers/{id}/plans")
+@Path("/customers/{customerId}/plans")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class PlanController {
     private final PlanService planService;
 
@@ -18,7 +21,7 @@ public class PlanController {
     }
 
     @GET
-    public Response findAll(@PathParam("id") UUID id) {
+    public Response findAll(@PathParam("customerId") UUID id) {
         Customer customer = Customer.findById(id);
         if (customer == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -28,14 +31,8 @@ public class PlanController {
 
     @POST
     @Transactional
-    public Response createRecipient(@PathParam("id") UUID id, Plan plan) {
-        Customer customer = Customer.findById(id);
-        if (customer == null) {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
-
+    public Response createRecipient(Plan plan) {
         try {
-            plan.customer = customer;
             planService.create(plan);
             return Response.status(Response.Status.CREATED).entity(plan).build();
         } catch (IllegalArgumentException e) {
@@ -44,23 +41,15 @@ public class PlanController {
     }
 
     @GET
-    public Response findById(@PathParam("id") Long id) {
-        Customer customer = Customer.findById(id);
-        if (customer == null) {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
-        return Response.ok(planService.findById(id)).build();
+    @Path("/{planId}")
+    public Response findById(@PathParam("planId") Long planId) {
+        return Response.ok(planService.findById(planId)).build();
     }
 
     @DELETE
     @Path("/{planId}")
     @Transactional
-    public Response deleteRecipient(@PathParam("id") UUID customerId, @PathParam("planId") Long planId) {
-
-        Plan plan = Plan.findById(planId);
-        if (plan == null || !plan.customer.id.equals(customerId)) {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
+    public Response deleteRecipient(@PathParam("planId") Long planId) {
 
         planService.deleteById(planId);
         return Response.noContent().build();

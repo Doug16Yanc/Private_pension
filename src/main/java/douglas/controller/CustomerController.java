@@ -4,11 +4,14 @@ import douglas.domain.entity.Customer;
 import douglas.service.CustomerService;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 import java.util.UUID;
 
 @Path("/customers")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class CustomerController {
 
     private final CustomerService customerService;

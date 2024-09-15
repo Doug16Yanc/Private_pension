@@ -1,5 +1,6 @@
 package douglas.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
 import jakarta.persistence.*;
@@ -24,10 +25,12 @@ public class Recipient extends PanacheEntityBase {
 
     public String phone;
 
+    @Embedded
     public Address address;
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
+    @JsonBackReference
     public Customer customer;
 
 }

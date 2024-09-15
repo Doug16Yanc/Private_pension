@@ -7,6 +7,5 @@ public class PlanNotFoundExceptionMapper implements ExceptionMapper<PlanNotFound
     @Override
     public Response toResponse(PlanNotFoundException e) {
         return Response.status(Response.Status.NOT_FOUND.getStatusCode(), "Plano não encontrado em nossa base de dados.").build();
-
     }
 }

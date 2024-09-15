@@ -5,11 +5,14 @@ import douglas.domain.entity.Recipient;
 import douglas.service.RecipientService;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 import java.util.UUID;
 
-@Path("customers/{id}/recipients")
+@Path("/customers/{customerId}/recipients")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class RecipientController {
 
     private final RecipientService recipientService;
@@ -18,9 +21,8 @@ public class RecipientController {
         this.recipientService = recipientService;
     }
 
-
     @GET
-    public Response findAll(@PathParam("id") UUID id) {
+    public Response findAll(@PathParam("customerId") UUID id) {
         Customer customer = Customer.findById(id);
         if (customer == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -30,7 +32,7 @@ public class RecipientController {
 
     @POST
     @Transactional
-    public Response createRecipient(@PathParam("id") UUID id, Recipient recipient) {
+    public Response createRecipient(@PathParam("customerId") UUID id, Recipient recipient) {
         Customer customer = Customer.findById(id);
         if (customer == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -48,23 +50,15 @@ public class RecipientController {
 
 
     @GET
-    public Response findById(@PathParam("id") UUID id) {
-        Customer customer = Customer.findById(id);
-        if (customer == null) {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
-        return Response.ok(recipientService.findById(id)).build();
+    @Path("/{recipientId}")
+    public Response findById(@PathParam("recipientId") UUID recipientId) {
+        return Response.ok(recipientService.findById(recipientId)).build();
     }
 
     @DELETE
     @Path("/{recipientId}")
     @Transactional
-    public Response deleteRecipient(@PathParam("id") UUID customerId, @PathParam("recipientId") UUID recipientId) {
-
-        Recipient recipient = Recipient.findById(recipientId);
-        if (recipient == null || !recipient.customer.id.equals(customerId)) {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
+    public Response deleteRecipient(@PathParam("recipientId") UUID recipientId) {
 
         recipientService.deleteById(recipientId);
         return Response.noContent().build();
