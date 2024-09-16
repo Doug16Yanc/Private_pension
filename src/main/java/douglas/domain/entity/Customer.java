@@ -41,9 +41,11 @@ public class Customer extends PanacheEntityBase {
     }
 
     public void addPlan(Plan plan) {
-
-        if (countPlanVGBL() >= 1 || countPlanPGBL() >= 2) {
-            throw new IllegalArgumentException("Você só pode possuir um plano do tipo VGBL e dois do tipo PGBL.");
+        if (plan.typePlan == TypePlan.VGBL && countPlanVGBL() >= 1) {
+            throw new IllegalArgumentException("Você só pode possuir um plano do tipo VGBL.");
+        }
+        if (plan.typePlan == TypePlan.PGBL && countPlanPGBL() >= 2) {
+            throw new IllegalArgumentException("Você só pode possuir dois planos do tipo PGBL.");
         }
         plans.add(plan);
     }
