@@ -2,6 +2,6 @@ package douglas.exception.customers;
 
 public class CustomerAlreadyExistentException extends RuntimeException{
     public CustomerAlreadyExistentException() {
-        super("Customer with the provided CPF already exists.");
+        super("Já há um cliente cadastrado com esse CPF no banco de dados.");
     }
 }

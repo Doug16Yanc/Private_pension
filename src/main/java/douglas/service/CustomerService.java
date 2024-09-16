@@ -35,7 +35,7 @@ public class CustomerService {
                 .list();
     }
 
-   public Customer findById(UUID id) {
+   public Customer findById(Long id) {
         return customerRepository.findByIdOptional(id)
                 .orElseThrow(CustomerNotFoundException::new);
     }
@@ -45,7 +45,7 @@ public class CustomerService {
         return query.firstResult();
     }
 
-    public void deleteById(UUID id) {
+    public void deleteById(Long id) {
         Customer customer = findById(id);
         customerRepository.delete(customer);
     }

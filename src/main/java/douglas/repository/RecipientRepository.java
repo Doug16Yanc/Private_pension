@@ -7,5 +7,5 @@ import jakarta.enterprise.context.ApplicationScoped;
 import java.util.UUID;
 
 @ApplicationScoped
-public class RecipientRepository implements PanacheRepositoryBase<Recipient, UUID> {
+public class RecipientRepository implements PanacheRepositoryBase<Recipient, Long> {
 }

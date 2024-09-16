@@ -21,7 +21,7 @@ public class PlanController {
     }
 
     @GET
-    public Response findAll(@PathParam("customerId") UUID id) {
+    public Response findAll(@PathParam("customerId") Long id) {
         Customer customer = Customer.findById(id);
         if (customer == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -31,8 +31,14 @@ public class PlanController {
 
     @POST
     @Transactional
-    public Response createRecipient(Plan plan) {
+    public Response createPlan(@PathParam("customerId") Long id, Plan plan) {
+        Customer customer = Customer.findById(id);
+        if (customer == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
         try {
+            customer.addPlan(plan);
+            plan.customer = customer;
             planService.create(plan);
             return Response.status(Response.Status.CREATED).entity(plan).build();
         } catch (IllegalArgumentException e) {

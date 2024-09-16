@@ -34,7 +34,7 @@ public class RecipientService {
                 .list();
     }
 
-    public Recipient findById(UUID id) {
+    public Recipient findById(Long id) {
         return recipientRepository.findByIdOptional(id)
                .orElseThrow(RecipientAlreadyExistentException::new);
     }
@@ -44,7 +44,7 @@ public class RecipientService {
         return query.firstResult();
     }
 
-    public void deleteById(UUID id) {
+    public void deleteById(Long id) {
         Recipient recipient = findById(id);
         recipientRepository.delete(recipient);
     }

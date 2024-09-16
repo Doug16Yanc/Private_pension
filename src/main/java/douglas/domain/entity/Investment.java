@@ -1,5 +1,6 @@
 package douglas.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
 
@@ -17,6 +18,7 @@ public class Investment extends PanacheEntityBase {
 
     public Double amount;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "plan_id")
     public Plan plan;

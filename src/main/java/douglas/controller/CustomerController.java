@@ -35,14 +35,14 @@ public class CustomerController {
     }
     @GET
     @Path("/{id}")
-    public Response getById(@PathParam("id") UUID id) {
+    public Response getById(@PathParam("id") Long id) {
         return Response.ok(customerService.findById(id)).build();
     }
 
     @DELETE
     @Path("/{id}")
     @Transactional
-    public Response deleteById(@PathParam("id") UUID id) {
+    public Response deleteById(@PathParam("id") Long id) {
         customerService.deleteById(id);
         return Response.noContent().build();
     }

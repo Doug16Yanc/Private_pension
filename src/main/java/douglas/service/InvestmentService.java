@@ -19,7 +19,6 @@ public class InvestmentService {
     }
 
     public Investment create(Investment investment) {
-
         investmentRepository.persist(investment);
         return investment;
     }

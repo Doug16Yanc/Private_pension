@@ -22,7 +22,7 @@ public class RecipientController {
     }
 
     @GET
-    public Response findAll(@PathParam("customerId") UUID id) {
+    public Response findAll(@PathParam("customerId")Long id) {
         Customer customer = Customer.findById(id);
         if (customer == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -32,7 +32,7 @@ public class RecipientController {
 
     @POST
     @Transactional
-    public Response createRecipient(@PathParam("customerId") UUID id, Recipient recipient) {
+    public Response createRecipient(@PathParam("customerId") Long id, Recipient recipient) {
         Customer customer = Customer.findById(id);
         if (customer == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -51,14 +51,14 @@ public class RecipientController {
 
     @GET
     @Path("/{recipientId}")
-    public Response findById(@PathParam("recipientId") UUID recipientId) {
+    public Response findById(@PathParam("recipientId") Long recipientId) {
         return Response.ok(recipientService.findById(recipientId)).build();
     }
 
     @DELETE
     @Path("/{recipientId}")
     @Transactional
-    public Response deleteRecipient(@PathParam("recipientId") UUID recipientId) {
+    public Response deleteRecipient(@PathParam("recipientId") Long recipientId) {
 
         recipientService.deleteById(recipientId);
         return Response.noContent().build();

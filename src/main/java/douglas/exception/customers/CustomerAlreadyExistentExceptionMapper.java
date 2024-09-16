@@ -7,6 +7,8 @@ public class CustomerAlreadyExistentExceptionMapper implements ExceptionMapper<C
 
     @Override
     public Response toResponse(CustomerAlreadyExistentException exception) {
-        return Response.status(Response.Status.NOT_FOUND.getStatusCode(), "Cliente já cadastrado em nossa base de dados.").build();
+        return Response.status(Response.Status.BAD_REQUEST)
+                .entity(exception.getMessage())
+                .build();
     }
 }

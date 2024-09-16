@@ -26,7 +26,7 @@ public class InvestmentController {
     }
 
     @GET
-    public Response findAll(@PathParam("customerId") UUID customerId, @PathParam("planId") Long planId) {
+    public Response findAll(@PathParam("customerId") Long customerId, @PathParam("planId") Long planId) {
         Customer customer = Customer.findById(customerId);
         Plan plan = Plan.findById(planId);
         if (customer == null && plan == null) {
