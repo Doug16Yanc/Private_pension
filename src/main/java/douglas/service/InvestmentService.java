@@ -34,11 +34,6 @@ public class InvestmentService {
                 .orElseThrow(InvestmentNotFoundException::new);
     }
 
-    public Customer findByCpf(String cpf) {
-        PanacheQuery<Customer> query = Customer.find("cpf", cpf);
-        return query.firstResult();
-    }
-
     public void deleteById(Long id) {
         Investment investment = findById(id);
         investmentRepository.delete(investment);

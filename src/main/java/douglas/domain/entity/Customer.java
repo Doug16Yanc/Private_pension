@@ -34,8 +34,8 @@ public class Customer extends PanacheEntityBase {
     public List<Recipient> recipients = new ArrayList<>();
 
     public void addRecipient(Recipient recipient) {
-        if (recipients.size() >= 3) {
-            throw new IllegalArgumentException("O número máximo de beneficiários é três.");
+        if (recipients.size() >= 1) {
+            throw new IllegalArgumentException("O número máximo de beneficiários é um.");
         }
         this.recipients.add(recipient);
     }

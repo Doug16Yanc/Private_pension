@@ -5,7 +5,6 @@ import douglas.exception.plans.PlanNotFoundException;
 import douglas.repository.PlanRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 
-
 import java.util.List;
 
 @ApplicationScoped

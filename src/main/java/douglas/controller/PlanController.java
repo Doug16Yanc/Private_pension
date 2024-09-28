@@ -40,7 +40,7 @@ public class PlanController {
             customer.addPlan(plan);
             plan.customer = customer;
             planService.create(plan);
-            return Response.status(Response.Status.CREATED).entity(plan).build();
+            return Response.ok(planService.create(plan)).build();
         } catch (IllegalArgumentException e) {
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
         }

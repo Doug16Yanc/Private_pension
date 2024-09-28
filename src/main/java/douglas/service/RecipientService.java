@@ -20,10 +20,6 @@ public class RecipientService {
     }
 
     public Recipient create(Recipient recipient) {
-
-        var existing = findByCpf(recipient.cpf);
-        if (existing != null) {
-            return null;        }
         recipientRepository.persist(recipient);
         return recipient;
     }
@@ -37,11 +33,6 @@ public class RecipientService {
     public Recipient findById(Long id) {
         return recipientRepository.findByIdOptional(id)
                .orElseThrow(RecipientAlreadyExistentException::new);
-    }
-
-    public Recipient findByCpf(String cpf) {
-        PanacheQuery<Recipient> query = Recipient.find("cpf", cpf);
-        return query.firstResult();
     }
 
     public void deleteById(Long id) {

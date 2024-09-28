@@ -41,10 +41,10 @@ public class InvestmentController {
 
     @POST
     @Transactional
-    public Response createRecipient(Investment investment) {
+    public Response createInvestment(Investment investment) {
         try {
             investmentService.create(investment);
-            return Response.status(Response.Status.CREATED).entity(investment).build();
+            return Response.ok(investmentService.create(investment)).build();
         } catch (IllegalArgumentException e) {
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
         }

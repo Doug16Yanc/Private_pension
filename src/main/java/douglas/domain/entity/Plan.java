@@ -13,7 +13,7 @@ import java.util.List;
 public class Plan extends PanacheEntityBase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    public Long id;
 
     @Enumerated(EnumType.STRING)
     public TypePlan typePlan;
